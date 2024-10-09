@@ -1,8 +1,19 @@
 version: '3.8'
 services:
-  smtp-reayer:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  smtp-relayer:
+    # env_file:
+    #   - .env
+    image: smtp-relayer
     ports:
-      - ${PORT}:${PORT}
+      - 4593:4593
+    deploy:
+      replicas: 1  # Número de réplicas do serviço
+      restart_policy:
+        condition: any  # Reiniciar o serviço se qualquer instância falhar
+        delay: 10s      # Esperar 10 segundos antes de reiniciar
+        max_attempts: 5 # Máximo de 5 tentativas de reinício
+        window: 60s     # Janela de tempo para os tentativos de reinício
+networks:
+  minha_rede:
+    external: true
+    name: minha_rede
