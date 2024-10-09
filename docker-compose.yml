@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: smtp-relayer
-    env_file:
-      - .env
     ports:
       - ${PORT}:${PORT}
     restart: always
