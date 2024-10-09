@@ -1,0 +1,11 @@
+services:
+  smtp-reayer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smtp-relayer
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    restart: always
